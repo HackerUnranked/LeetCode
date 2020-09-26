@@ -1,3 +1,4 @@
+from typing import List
 #Given the array nums, for each nums[i] find out how many numbers in the array are smaller than it.
 #That is, for each nums[i] you have to count the number of valid j's such that j != i and nums[j] < nums[i].
 
@@ -13,3 +14,14 @@
 #For nums[2]=2 there exist one smaller number than it (1). 
 #For nums[3]=2 there exist one smaller number than it (1). 
 #For nums[4]=3 there exist three smaller numbers than it (1, 2 and 2).
+class Solution:
+    def smallerNumbersThanCurrent(self, nums: List[int]) -> List[int]:
+        # BRUTE FORCE
+        #to_return = []
+        #for x in range(len(nums)):
+        #    to_add = 0
+        #    for y in range(len(nums)):
+        #        if nums[x] > nums[y]:
+        #            to_add+= 1
+        
+        #return to_return
