@@ -9,3 +9,16 @@
 
 #Input: J = "aA", S = "aAAbbbb"
 #Output: 3
+
+class Solution:
+    def numJewelsInStones(self, J: str, S: str) -> int:
+        jewels = {}
+        
+        for x in J:
+            jewels[x] = 0
+        
+        for y in S:
+            if y in jewels:
+                jewels[y] += 1
+        
+        return sum(jewels.values())
