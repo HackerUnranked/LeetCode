@@ -17,9 +17,9 @@ from typing import List
 # Example 2:
 
 # Input: mat = [[1,1,1,1],
-#              [1,1,1,1],
-#              [1,1,1,1],
-#              [1,1,1,1]]
+#              [ 1,1,1,1],
+#              [ 1,1,1,1],
+#              [ 1,1,1,1]]
 #Output: 8
 
 #Example 3:
