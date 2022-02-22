@@ -34,6 +34,42 @@ class Solution:
             return True
         else:
             return False
-                
-                
-            
+'''
+Same solution as above but written a different way
+
+class Solution:
+    def isValid(self, s: str) -> bool:
+        parans = []
+        for x in s:
+            # push all the openning parans first
+            if x == '{' or x == '(' or x == '[':
+                parans.append(x)
+            # we received a closing parans
+            else:
+                # if the list is empty return false because
+                # we don't have a matching open parans
+                if parans == []:
+                    return False
+                # check to see if the open parans match the
+                # last closing parans that we received
+                else:
+                    if x == '}':
+                        # we have a match remove the matching pair
+                        if parans[-1] == '{':
+                            parans.pop()
+                        else:
+                            return False
+                    if x == ")":
+                        if parans[-1] == '(':
+                            parans.pop()
+                        else:
+                            return False
+                    if x == ']':
+                        if parans[-1] == '[':
+                            parans.pop()
+                        else:
+                            return False
+        if parans != []:
+            return False
+        return True
+'''                             
