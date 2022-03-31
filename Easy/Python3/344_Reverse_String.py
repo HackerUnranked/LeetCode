@@ -15,6 +15,14 @@ class Solution:
         """
         Do not return anything, modify s in-place instead.
         """
-        s.reverse()
-        return s
+        right = 0
+        left = len(s) -1
+         
+        while right < left:
+            right_holder = s[right]
+            s[right] = s[left]
+            s[left] = right_holder
+            right += 1
+            left -= 1
         
+        return s
