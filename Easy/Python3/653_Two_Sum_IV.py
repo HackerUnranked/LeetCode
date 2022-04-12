@@ -56,3 +56,27 @@ class Solition_1:
             return True
         if self.__findTarget(root.right, nodes, k):
             return True
+
+class Solution_2:
+    def findTarget(self, root: TreeNode, k: int) -> bool:
+        dic = {}
+        
+        def helper(root1):
+            helper1 = False
+            helper2 = False
+            
+            if not root1:
+                return
+            if k - root1.val not in dic:
+                dic[root1.val] = k - root1.val
+                helper1 = helper(root1.right)
+                helper2 = helper(root1.left)
+            else:
+                helper1 = True
+            
+            if helper1 or helper2:
+                return True
+            return False
+        
+        bob = helper(root)
+        return bob
