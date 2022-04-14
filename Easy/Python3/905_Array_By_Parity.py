@@ -26,3 +26,39 @@ class Solution:
         return evens
       # One liner solution below
       # return [i for i in A if i % 2 ==0]+[i for i in A if i % 2 != 0]
+class Solution_1:
+    def sortArrayByParity(self, nums: List[int]) -> List[int]:
+        my_list = []
+        
+        for x in nums:
+            if x % 2 == 0:
+                my_list.insert(0,x)
+            else:
+                my_list.append(x)
+        
+        return my_list
+
+# Modify in-space, O(1) space and O(n) time complexity
+class Solution_2:
+    def sortArrayByParity(self, nums: List[int]) -> List[int]:
+        beg = 0
+        end = len(nums) -1
+        
+        while beg < end:
+            # if we are not even
+            if nums[beg] %2 != 0:
+                # check if the end is even and swap if it is
+                if nums[end] %2 == 0:
+                    temp = nums[beg]
+                    nums[beg] = nums[end]
+                    nums[end] = temp
+                    beg += 1 # move foward 1
+                    end -= 1 # go backwards 1
+                else:
+                    end -= 1 # the end is odd so we move left to check if that value is even
+            # move foward because we are even
+            else:
+                beg += 1
+        
+        return nums
+                    
