@@ -43,3 +43,22 @@ class Solution:
             return self.searchBST(root.left,val)
         elif val > root.val:
             return self.searchBST(root.right,val)
+
+class Solution_1:
+    def searchBST(self, root: TreeNode, val: int) -> TreeNode:
+        my_list = []
+        
+        def help(the_root):
+            
+            if not the_root:
+                return
+            elif val == the_root.val:
+                my_list.append(the_root)
+            else:
+                help(the_root.right)
+                help(the_root.left)
+        
+        help(root)
+        
+        if my_list:
+            return my_list[0]
