@@ -32,3 +32,27 @@ class Solution:
             return False
         
         return self.isUnivalTree(root.right) and self.isUnivalTree(root.left)
+
+# using stack here, this is the iterative solition i believe
+class Solution_1:
+    def isUnivalTree(self, root: TreeNode) -> bool:
+        
+        if root == None:
+            return False
+        
+        stack = []
+        stack.append(root)
+        look = root.val
+        
+        while len(stack) != 0:
+            to_look = stack.pop()
+            
+            if to_look.val != look:
+                return False
+            if to_look.left:
+                stack.append(to_look.left)
+            if to_look.right:
+                stack.append(to_look.right)
+        
+        return True
+                
