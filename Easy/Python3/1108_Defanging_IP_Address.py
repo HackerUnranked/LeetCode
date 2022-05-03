@@ -17,3 +17,10 @@ class Solution:
                 new_address += x
         
         return new_address
+
+
+# new solution using join and list comprehension
+class Solution_1:
+    def defangIPaddr(self, address: str) -> str:
+        new_ip = "".join(["[.]" if x == '.' else x for x in address])
+        return new_ip
