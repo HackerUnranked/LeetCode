@@ -24,4 +24,24 @@ class Solution:
             curr =curr.next # move over
         
         return dummy.next
-                
+
+# no dummy node
+class Solution_1:
+    def removeElements(self, head: ListNode, val: int) -> ListNode:
+        curr = head
+        prev = None
+        
+        while curr:
+            if curr.val == val:
+                if curr == head: # if current is pointing at head
+                    head = head.next # move head over because we have a new head
+                    prev = head # point prev to headhead it is the new previous
+                else:
+                    prev.next = curr.next # have previous disconnect from the current node
+            else:
+                prev = curr # we just point it to previous because it doesn't match he value to be removed
+            
+            curr = curr.next # move over
+        
+        return head
+                 
