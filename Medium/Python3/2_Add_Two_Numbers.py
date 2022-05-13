@@ -75,3 +75,65 @@ class Solution:
         
         head = helper(head, l1, l2, 0)
         return head 
+
+
+class Solution1:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        c1 = l1
+        c2 = l2
+        carry = 0
+        
+        #helper to traverse and calculate the carry
+        def helper(temp2,acarry):
+            
+            while temp2:
+                
+                temp2.val += acarry
+                
+                # if we are 10 then set us to 0
+                if temp2.val == 10:                    
+                    temp2.val = 0
+                    
+                    if temp2.next == None and acarry == 1:
+                        temp2.next = ListNode(1)
+                        break
+                else:
+                    acarry = 0
+                        
+                temp2 = temp2.next
+        
+        while c1 or c2:
+            
+            # calculate
+            carry, val = divmod(c1.val+c2.val+carry, 10)
+            c1.val = val
+            c2.val = val
+            
+            # both are at the last node
+            if c1.next == None and c2.next == None:
+                if carry == 1:
+                    c1.next = ListNode(1)
+                    
+                return l1
+            
+            # we are at the last node of c1
+            elif c1.next == None and c2.next:
+                c1.next = c2.next # point the next pointer of the ending node to wherever c2 is
+            
+                if carry == 1:
+                    helper(c2.next,carry)
+                
+                return l1
+            
+            # we are at the node of c2
+            elif c1.next and c2.next == None:
+                c2.next = c1.next # point me to c1
+            
+                # loop the rest of the list in case there is a carry on
+                if carry == 1:
+                    helper(c1.next,carry)
+                
+                return l2 # here we return l2 because l1 ended first
+            
+            c1 = c1.next
+            c2 = c2.next
