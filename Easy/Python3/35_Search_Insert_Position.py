@@ -23,14 +23,15 @@ from typing import List
 
 class Solution:
     def searchInsert(self, nums: List[int], target: int) -> int:
-        idx = 0
+        
+        
         for x,y in enumerate(nums):
-            if y == target:
+            # if we found the target or the current
+            # number is greater than the target then
+            # return x because that is where the target
+            # should be placed
+            if y == target or y > target:
                 return x
-            elif y < target:
-                idx = x + 1
-            # i am smaller than the next number
-            else:
-                break
-        return idx
+        
+        return len(nums)
                 
