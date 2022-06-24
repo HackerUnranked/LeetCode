@@ -40,3 +40,33 @@ class Solution:
                 total += x
         
         return total
+    
+    # Note this is the rerucsive solution where we use an array instead of a dictionary
+    def sumOfUnique_recursive(self, nums: List[int]) -> int:
+        buckets = [0] * 101 # buckets to count apperance
+
+        # helper recusivice function to loop the nums array and count the occurence of each number 
+        def helper(buck, count):
+
+            # base case if we reached the end of the array then exit 
+            if count == len(nums):
+                return
+            
+            # count the occurrence of the number
+            buck[nums[count]] += 1
+            
+            # recusive call
+            count += 1
+            helper(buck,count)
+            
+            # if we only seen the number once, incrememnt the sum
+            # NOTE we use idx 0 as the placeholder for the sum sice
+            # the constraints is that the nums is between 1 < 100
+            if buck[nums[count - 1]] == 1:
+                buck[0] += nums[count -1]
+        
+        helper(buckets,0)
+                    
+        return buckets[0]
+            
+                
