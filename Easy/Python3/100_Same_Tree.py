@@ -7,55 +7,53 @@ class TreeNode:
         self.left = left
         self.right = right
 
+# Using a stack and dfs! Iterative solution!
+# Space O(n)
+# Time  O(n)
 class Solution:
     def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
         
-        # if they are both Null then return true
-        if p == q and q == None:
-            return True
-        # only one of them is None so we return false
-        if p == None:
-            return False
-        if q == None:
-            return False
+        stacks = [p,q]
         
-        list_1 = []
-        list_2 = []
+        while stacks:
         
-        # visit the parent first
-        list_1.append(p)
-        list_2.append(q)
+            r1 = stacks.pop()
+            r2 = stacks.pop()
+
+            # these are cases where the node exists only for one and not both,
+            # return false            
+            if r1 and not r2:
+                return False
+            if r2 and not r1:
+                return False
+            if r1 and r2:
+                # return false if the values don't match
+                if r1.val != r2.val:
+                    return False
+                else:
+                    # append the children
+                    stacks.append(r1.right)
+                    stacks.append(r2.right)
+                    stacks.append(r1.left)
+                    stacks.append(r2.left)
         
-        # User preorder traversal and visit the children node
-        # to compare if the trees are the same
-        while len(list_1) > 0 and len(list_2) > 0:
-            # grab the node in stack to compare
-            root_1 = list_1.pop()
-            root_2 = list_2.pop()
-            
-            # the Values don't match return false
-            if root_1.val != root_2.val:
-                return False
-            # the second tree has a right child but the first tree doesn't
-            if root_2.right and root_1.right == None:
-                return False
-            # if the second tree has a left child but the first tree doesn't
-            if root_2.left and root_1.left == None:
-                return False
-            # if the first tree has a right child but the second tree doesn't
-            if root_1.right and root_2.right == None:
-                return False
-            # if the first tree has a left child but the second tree doesn't
-            if root_1.left and root_2.left == None:
-                return False
-            
-            # if either of them match then grab the children and append it so we can search
-            # and compare
-            if root_1.right and root_2.right:
-                list_1.append(root_1.right)
-                list_2.append(root_2.right)
-            if root_1.left and root_2.left:
-                list_1.append(root_1.left)
-                list_2.append(root_2.left)
-                
         return True
+
+    # recursive solition
+    # space O(1)
+    # time O(n) 
+    def isSameTree_recursive(self, p: TreeNode, q: TreeNode) -> bool:
+        
+        if not p and not q:
+            return True
+        if p and not q:
+            return False
+        if q and not p:
+            return False
+        if p.val != q.val:
+            return False
+            
+        r = self.isSameTree(p.right, q.right)
+        l = self.isSameTree(p.left, q.left)
+            
+        return l & r
