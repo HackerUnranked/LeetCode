@@ -24,29 +24,23 @@ from typing import List
 class Solution:
     def luckyNumbers (self, matrix: List[List[int]]) -> List[int]:
         
-        if len(matrix) == 0:
-            return None
-        
-        lucky = []
-        
-        for rows in matrix:
-            # get the minimum in the row
-            min_num = min(rows)
-            found = True
-            # loop the row and find the index of the min number
-            for i,num in enumerate(rows):
-                # we found the number we need to compare
-                if min_num == num:
-                    # loop each column at that index
-                    for col in matrix:
-                        # if the number is bigger than the min in the column then we leave because
-                        # it is not a lucky number
-                        if col[i] > min_num:
-                            found = False
-                            break
-            # if the num is the biggest in the column and the smallest in the row then it is a lucky number
-            # add it to the array
-            if found == True:
-                lucky.append(min_num)
-        
-        return lucky
+        for x in range(len(matrix)):
+            small = matrix[x][0] # helps us find the smallest value
+            the_idx = 0 # idx so we know which column to look 
+            
+            # find the smallest value
+            for idx,val in enumerate(matrix[x]):
+                if small > val:
+                    small = val
+                    the_idx = idx
+            
+            big = 0 # to find the biggest
+            
+            # loop the column to find the biggest
+            for cols in matrix:
+                if cols[the_idx] > big:
+                    big = cols[the_idx]
+                    
+            # compare the biggest val in col with smallest in row and return if they are the same
+            if big == small:
+                return [small]
