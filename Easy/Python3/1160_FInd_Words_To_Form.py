@@ -37,4 +37,34 @@ class Solution:
                 count_me += len(word)
         
         return count_me
-                
+    
+    # this is the solution using buckets instead of a dictionary
+    def countCharacters_array(self, words: List[str], chars: str) -> int:
+        
+        count = 0
+        
+        for word in words:
+            bucket = [0] * 26
+            
+            # count the letters in the words
+            for letters in word:
+                bucket[122 - ord(letters)] += 1
+            
+            # subtract the chars
+            for letters in chars:
+                # the letter is a match so we subtract
+                if bucket[122 - ord(letters)] > 0:
+                    bucket[122 - ord(letters)] -= 1
+            
+            zero = True
+            
+            # if a string is all 0 it means we can see create the word so add the count
+            for num in bucket:
+                if num != 0:
+                    zero = False
+                    break
+            
+            if zero == True:
+                count += len(word)
+        
+        return count
