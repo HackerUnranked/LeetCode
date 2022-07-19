@@ -30,7 +30,16 @@ class Solution:
         
         for idx in range(len(image)):
             rev = image[idx] # get the row
-            rev = rev[::-1] # reverse the row
+            first = 0 # right half
+            second = len(rev) - 1 # left half
+            
+            # reverse the list
+            while first < second:
+                temp = rev[first]
+                rev[first] = rev[second]
+                rev[second] = temp
+                first += 1
+                second -= 1
             
             # replace 1 with 0 and 0 with 1
             for val in range(len(rev)):
