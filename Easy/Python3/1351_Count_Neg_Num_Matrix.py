@@ -36,4 +36,25 @@ class Solution:
                 big_zero += 1
         
         return big_zero
-        
+
+    # another solution O(m + n) i beleive 
+    def countNeg(self, grid: List[List[int]]) -> int:
+        count = 0
+        for nums in grid:
+            # if the first number is negative then it means
+            # the rest of the array contains negative numbers
+            # therefore we don't need to loop and just add the
+            # size of the array to our count
+            if nums[0] < 0:
+                count += len(nums)
+            else:
+                # if the last number is negative the part of the array
+                # is negative otherwise the whole array contains positives
+                # loop backwards and count the negatives
+                if nums[-1] < 0:
+                    for a in range(len(nums) - 1, -1, -1):
+                        if nums[a] < 0:
+                            count += 1
+                        else:
+                            break # we seen a positive leave
+            return count
