@@ -29,10 +29,18 @@
 #Output: 2
 #Explanation: s can be split into "RL", "RRRLLRLL", since each substring contains an equal number of 'L' and 'R'
 
-def balancedStringSplit(self, s: str) -> int:
-    res = cnt = 0         
-    for c in s:
-        cnt += 1 if c == 'L' else -1            
-        if cnt == 0:
-            res += 1
-    return res  
+class Solution:
+    def balancedStringSplit(self, s: str) -> int:
+        res = cnt = 0         
+        for c in s:
+            # if we see an L add +1
+            if c == 'L':
+                cnt += 1
+            else:
+                # subtract -1 if we see R
+                cnt -= 1
+            # if we reached 0 it means we have a balanced string therefore increment the res
+            if cnt == 0:
+                res += 1
+                
+        return res  
