@@ -43,7 +43,7 @@ class Solution:
             
             mid = len(a_nums) // 2 # get the mid of the list
             
-            a_root = TreeNode(a_nums[mid]) # create a new node
+            a_root = a_nums[mid] # assign node
             a_root.right = helper(a_root.right,a_nums[mid+1:]) # traverse right with right half of array
             a_root.left = helper(a_root.left,a_nums[:mid]) # traverse left with left half of array
             
@@ -59,7 +59,7 @@ class Solution:
             return
         
         self.inorder_traversal(root.left, arr)
-        arr.append(root.val)
+        arr.append(root)
         self.inorder_traversal(root.right, arr)
         
     '''
