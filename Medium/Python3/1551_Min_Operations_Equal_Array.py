@@ -35,21 +35,17 @@
 class Solution:
     def minOperations(self, n: int) -> int:
 
-        # if there is only 1 element we return 0, no steps needed        
-        if n == 1:
-            return 0
+        val = 0
 
-        # create an array and find the value to make all the values in the array 
-        arr = []
         for x in range(n):
-            # n is how big the array is
-            # each value is, (index * 2) + 1, where index is x for us
-            arr.append(x*2 + 1)
+            # each value is, (index * 2) + 1 for an array size n
+            val += x*2 + 1
 
-        # add all the values of the array and find the equal value we need to make each index
-        val = sum(arr)//n
+        # get the average of the numbers so we know what our target to reach
+        # for each number is
+        val //= n
 
-        r = 0 # this is our right index
+        r = 0 # this is our index
         steps = 0 # steps we have taken
         go = True # makes the loop go
         
@@ -57,13 +53,13 @@ class Solution:
             # calculate if we are bigger than the value we need to be
             # if we are not then find out how far we are off, this is
             # the number of steps since every +1 is a step
-            if (2*r+1) < val:
-                steps += (val - (2*r +1)) # calculates the step
-                r+= 1 # move the index over 1
+            if (2 * r + 1) < val:
+                steps += val - (2*r + 1) # calculates the step
+                r += 1 # move the index over 1
             # if we reached a value were the index is bigger than the value it means we
             # did all the steps already
             else:
-                break
+                go = False
         
         return steps
             
