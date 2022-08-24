@@ -31,19 +31,52 @@ class Solution:
     def rearrangeArray(self, nums: List[int]) -> List[int]:
         vals = [0]*len(nums) # create array size N
         
-        idx = 0
-        idx_p = 0
-        idx_n = 1
+        idx = 0 # idx for the array
+        idx_p = 0 # positive idx
+        idx_n = 1 # negative idx
         
+        # traverse the array and keep track of where we will insert the positive and negative number
         while idx < len(nums):
-            
+            # if i see a positive number
             if nums[idx] > 0:
-                vals[idx_p] = nums[idx]
-                idx_p += 2
+                vals[idx_p] = nums[idx] # add the positive with where the positive idx is in the new array
+                idx_p += 2 # move the positive idx over 2
+            # I saw a negative number
             else:
-                vals[idx_n] = nums[idx]
-                idx_n += 2
+                vals[idx_n] = nums[idx] # add the negative number in the new array 
+                idx_n += 2 # move the negative idx
                 
-            idx += 1
+            idx += 1 # increment the idx
                 
         return vals
+    
+    # using right half and left half as sorting for positive and negative numbers
+    def rearrangeArray(self, nums: List[int]) -> List[int]:
+        holder = [0] * len(nums) # sort positives at left half and negatives at right half
+        
+        start = 0
+        end = len(nums) // 2
+        
+        for x in nums:
+            # add at left half
+            if x > 0:
+                holder[start] = x
+                start += 1
+            # add at right half
+            else:
+                holder[end] = x
+                end += 1
+        
+        # add to list traversing from left and right half
+        left = 0
+        right = len(holder) // 2
+        ans = []
+        
+        while right != len(holder):
+            ans.append(holder[left])
+            ans.append(holder[right])
+            right += 1
+            left += 1
+        
+        return ans
+            
