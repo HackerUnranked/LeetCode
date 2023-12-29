@@ -44,4 +44,37 @@ class Solution_1:
             curr = curr.next # move over
         
         return head
-                 
+
+class Solution_2:
+    def removeElements(self, ListNode, val: int) -> ListNode:
+        # Don't use dummy node and keep changing head if the value of head
+        # matches val
+        while head and head.val == val:
+            if head.val == val:
+                head = head.next
+        
+        # return none if head is none. We reach this case if all the nodes are equal to val
+        if not head:
+            return None
+
+        # No we loop the list starting where head is because we made sure head
+        # is not equal to val
+        current = head
+
+        while current.next:
+            # If my next is equal to the val then I change my next pointer to skip it
+            # example:
+            #
+            # head is 4, val is 3
+            # 4 -> 3 -> 7
+            #
+            # change 4 to point to 7:
+            # 4 -> 7
+            #
+            # Proceed to check if 
+            if current.next.val == val:
+                current.next = current.next.next
+            else:
+                current = current.next
+
+        return head 
