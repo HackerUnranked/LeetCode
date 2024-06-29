@@ -34,6 +34,30 @@ class Solution:
             return True
         else:
             return False
+    
+    # Same solution but a more readable way
+    def isValid_v2(self, s: str) -> bool:
+        if len(s) == 0:
+            return False
+        
+        stack = []
+        set_open = {'(', '[', '{'}
+        set_match_open = {']':'[', '}':'{', ')':'('}
+        
+        for a in s:
+            if a in set_open:
+                stack.append(a)
+            else:
+                if len(stack) == 0:
+                    return False
+                elif set_match_open[a] != stack[-1]:
+                    return False
+                else:
+                    stack.pop()
+        
+        if len(stack) == 0:
+            return True
+        return False
 '''
 Same solution as above but written a different way
 
