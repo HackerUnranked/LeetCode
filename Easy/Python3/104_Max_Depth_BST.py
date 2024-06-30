@@ -74,4 +74,24 @@ class Solution:
             if current_node.right:
                 queue.append((current_node.right, depth + 1))
         
-        return max_depth  
+        return max_depth
+    
+    # This uses a stack to implement DFS. Unlike BFS, which explores the tree level by level,
+    # DFS dives as deep as possible into the tree before backtracking. This means it might reach
+    # the deepest part of the tree with the first path it takes. The stack facilitates backtracking
+    # to explore unvisited paths. Depth is tracked to determine the maximum depth reached during
+    # the traversal.
+    def maxDepthStack(self, root: TreeNode) -> int:
+        max_depth = 0
+        if not root:
+            return 0
+        stack = [(root, 0)] # add the root and its depth to the stack
+        # Loop until the stack is empty
+        while stack:
+            node, depth = stack.pop() # Get the node and its depth
+            max_depth = max(max_depth, depth)
+            if node:
+                stack.append((node.left, depth + 1))
+                stack.append((node.right, depth + 1))
+        return max_depth
+            
