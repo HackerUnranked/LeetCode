@@ -34,4 +34,26 @@ class Solution:
                 return x
         
         return len(nums)
+    
+    # This is the binary search solution
+    def binarySearchInsert(self, nums: List[int], target: int) -> int:
+        left, right = 0, len(nums) - 1 # Get the start and end index
+        
+        # Loop up until the end of the array
+        while left <= right:
+            # Get the middle index of the array, this floors mid so we always get the lowest value
+            mid = (left + right) // 2
+            
+            # Check if the middle is the target and if so then return the index
+            if nums[mid] == target:
+                return mid
+            # If the mid is smaller than the target then we shift the left index
+            # to start at the second half of the array. We do a  + 1 so we can
+            elif nums[mid] < target:
+                left = mid + 1
+            # If mid is greather than the target then we shift the right index to discard the larger half
+            else:
+                right = mid - 1
+        
+        return left
                 
