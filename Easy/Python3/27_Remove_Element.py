@@ -64,3 +64,15 @@ class Solution:
             start += 1 # move to the next index to check dictionary
         
         return total
+
+    # This is a better solution because it does not use a dictionary to keep track of the numbers that are not equal to
+    def removeElement1(self, nums: List[int], val: int) -> int:
+        placement = 0 # keep track of the index where we are going to insert the number that is not equal to the value
+        for num in nums:
+            # the number is not the same as the value then insert it at the designated index
+            if num != val:
+                nums[placement] = num
+                placement += 1 # move index to the next position
+            # if the number is the same as the value, then we will skip it
+            # and just keep traversing
+        return placement
