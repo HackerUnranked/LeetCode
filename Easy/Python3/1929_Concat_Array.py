@@ -38,3 +38,7 @@ class Solution:
             nums.append(nums[x])
         
         return nums
+    
+    def getConcatenation_iterative_2(self, nums: List[int]) -> List[int]:
+        for num in nums:
+            nums.append(num)
