@@ -76,9 +76,7 @@ class Solution:
         head = helper(head, l1, l2, 0)
         return head 
 
-
-class Solution1:
-    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+    def addTwoNumbers2(self, l1: ListNode, l2: ListNode) -> ListNode:
         c1 = l1
         c2 = l2
         carry = 0
@@ -137,3 +135,25 @@ class Solution1:
             
             c1 = c1.next
             c2 = c2.next
+    
+    # This solution is the simplest
+    def addTwoNumbers3(self, l1: ListNode, l2: ListNode) -> ListNode:
+        dummy = ListNode()
+        current = dummy
+        carry = 0
+        
+        while l1 or l2 or carry:
+            val1 = l1.val if l1 else 0 # if l1 is not None then get the value of l1
+            val2 = l2.val if l2 else 0 # if l2 is not None then get the value of l2
+            total = val1 + val2 + carry # add the values of l1 and l2 and the carry
+            carry = 1 if total > 9 else 0 # get the carry if the total is greater than 9 then carry is 1 else 0
+            current.next = ListNode(total % 10) # get the remainder of the total and add it to the next node
+            current = current.next
+            
+            # move to the next node
+            if l1:
+                l1 = l1.next
+            if l2:
+                l2 = l2.next
+        
+        return dummy.next
