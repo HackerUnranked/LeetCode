@@ -157,3 +157,38 @@ class Solution:
                 l2 = l2.next
         
         return dummy.next
+    
+    # This solution is the same as the previous one but it is more optimized for
+    # space
+    def addTwoNumbers4(self, l1: ListNode, l2: ListNode) -> ListNode:
+        head = l1
+        carry = 0
+        
+        # Loop through the nodes of l1 and l2
+        while l1 and l2:
+            carry, l1.val = divmod(l1.val + l2.val + carry, 10) # get the carry and the remainder of the sum of l1 and l2
+            # if both nodes have a next pointer then we keep moving to the next node
+            if l1.next and l2.next:
+                l1 = l1.next # move to the next node
+                l2 = l2.next # move to the next node
+            # break beacause we might have reached the end of l1 or l2 or both
+            else:
+                break
+        
+        # if l2 has more nodes than l1 then we point the next node of l1 to the
+        # next node of l2 otherwise we do nothing because l1 has more nodes than l2
+        if l2.next:
+            l1.next = l2.next
+        
+        # loop through the remaining nodes of l1 nodes if there are any, please
+        # note that we might have switched l1 and l2 from the logic above
+        while l1.next:
+            l1 = l1.next
+            carry, l1.val = divmod(l1.val + carry, 10) # get the carry and the remainder of the sum of l1 and the carry
+        
+        # if there is a carry then we add a new node to the end of the list, the
+        # last node has a value of 1 if there is a carry
+        if carry:
+            l1.next = ListNode(carry)
+        
+        return head
